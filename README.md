@@ -1,4 +1,3 @@
-Absolutely — here’s the revised version with **“The Two Basic Ways to Control a Tone”** as the main section, and `noTone()` treated separately.
 
 # Arduino `tone()` Function
 
@@ -51,7 +50,6 @@ This tells the Arduino to generate a **440 Hz** signal on digital pin 8.
 
 If a suitable buzzer or speaker is connected to that pin, you will hear a tone corresponding approximately to the musical note **A4**.
 
-[DIAGRAM: Break `tone(8, 440)` into `pin = 8`, `frequency = 440 Hz`, and `output = square wave`]
 
 ---
 
@@ -61,11 +59,9 @@ A square wave rapidly switches between two voltage levels.
 
 A simplified representation looks like this:
 
-```text
-HIGH ────┐    ┌────┐    ┌────┐
-         │    │    │    │
-LOW      └────┘    └────┘    └────
-```
+
+<img width="1600" height="700" alt="high-low-square-wave" src="https://github.com/user-attachments/assets/d1ecc635-f52a-4af8-b461-e056346e2a30" />
+
 
 The number of complete cycles produced every second determines the frequency.
 
@@ -74,8 +70,6 @@ For example:
 ```text
 440 Hz = approximately 440 cycles per second
 ```
-
-[IMAGE: Square-wave diagram with one cycle clearly labeled]
 
 This rapidly changing electrical signal causes a suitable buzzer or speaker to vibrate, producing sound.
 
@@ -165,7 +159,6 @@ You can think of it as:
 Pin 8 → 440 Hz → 🔊
 ```
 
-[VISUAL: Animate `Pin 8 → 440 Hz → Buzzer → Sound`]
 
 ### Example
 
@@ -235,7 +228,6 @@ the Arduino generates approximately one second of 440 Hz sound.
 100 ms  → 0.1 seconds
 ```
 
-[DIAGRAM: A 1000 ms timeline showing the tone starting at 0 ms and ending at 1000 ms]
 
 ### Example
 
@@ -295,7 +287,6 @@ Wait 1 second
 Stop tone
 ```
 
-[DIAGRAM: Timeline showing `tone()` → sound continues → `noTone()` → sound stops]
 
 This gives you another way to control the lifetime of a tone.
 
@@ -352,18 +343,7 @@ The tone can continue playing while the LED is turned on.
 
 Conceptually:
 
-```text
-tone(8, 440)
-      │
-      ├────────────────────► Tone continues
-      │
-      └──► Arduino continues executing code
-                         │
-                         ▼
-                 digitalWrite(...)
-```
-
-[DIAGRAM: Timeline showing `tone()` starting and the Arduino immediately continuing to other instructions]
+![Arduino tone waveform](assets/diagrams/xV3lw5NuBM3tIeV9AJ2sMY_1789931282831_na1fn_L2hvbWUvdWJ1bnR1L3RvbmUtZXhlY3V0aW9uLWZsb3c.webp)
 
 This means sound can happen alongside other operations in your program.
 
@@ -385,14 +365,9 @@ Timers are hardware resources inside the microcontroller. Other libraries and fe
 
 This means that a project can encounter conflicts if another feature also depends on Timer2.
 
-```text
-                 TIMER 2
-                /       \
-               /         \
-          tone()       Other library
-```
 
-[DIAGRAM: ATmega328P showing Timer2 being shared between `tone()` and another hardware function]
+![Arduino](assets/diagrams/zsFwsyyJQSiCLE4ntHhjBu_1789931693759_na1fn_L2hvbWUvdWJ1bnR1L3RpbWVyLTItYnJhbmNo.webp)
+
 
 For simple Arduino projects, you generally don't need to worry about this.
 
@@ -447,8 +422,6 @@ You should hear the pitch rise as the frequency increases.
 
 [IMAGE: Three waveform diagrams showing 200 Hz, 400 Hz, and 800 Hz]
 
-[VISUAL: Frequency slider moving upward while the perceived pitch rises]
-
 ---
 
 # Playing Musical Notes
@@ -468,7 +441,7 @@ For example, the notes of the C major scale are approximately:
 | B4   | 493.88 Hz |
 | C5   | 523.25 Hz |
 
-[IMAGE: Piano keyboard highlighting C4 through C5 with frequency labels]
+
 
 You may notice that several frequencies contain decimal values.
 
@@ -550,7 +523,7 @@ The result is:
 C → D → E → F → G → A → B → C
 ```
 
-[IMAGE: C major scale represented on a piano keyboard or musical staff]
+
 
 ---
 
@@ -590,7 +563,7 @@ noTone(8);
 
 Each `tone()` call changes the frequency, while the delays determine how long we remain on each note.
 
-[DIAGRAM: Melody timeline showing different frequencies and durations]
+
 
 ---
 
@@ -634,7 +607,7 @@ This makes `tone()` useful alongside:
 * Games
 * User interfaces
 
-[IMAGE: Arduino project showing a buzzer working alongside LEDs, buttons, and a sensor]
+
 
 ---
 
@@ -664,7 +637,6 @@ analogWrite(9, 128);
 
 PWM is commonly used for applications such as controlling LED brightness or motor power.
 
-[DIAGRAM: Compare `tone()` → frequency/pitch with `analogWrite()` → PWM duty cycle]
 
 The key idea is:
 
@@ -766,7 +738,7 @@ A passive buzzer can be driven with different frequencies to produce different p
 
 An active buzzer contains its own oscillator and is generally intended to produce its characteristic tone when powered.
 
-[IMAGE: Active vs passive buzzer comparison]
+
 
 If you want to experiment with melodies and different frequencies, a **passive buzzer** is generally the more useful choice.
 
@@ -827,34 +799,7 @@ The following table can be useful when experimenting with simple Arduino melodie
 
 Once you understand `tone()`, you can turn the basic function into increasingly interesting projects.
 
-### Beginner Projects
 
-* 🔔 Doorbell
-* 🚨 Simple alarm
-* ⏱️ Timer notification
-* 🔘 Button-controlled buzzer
-* 🚗 Parking sensor beeper
-
-### Intermediate Projects
-
-* 🎵 Melody player
-* 🎹 Mini Arduino piano
-* 🚦 Traffic-light sound system
-* 🎮 Game sound effects
-* 🔐 Electronic lock with audio feedback
-
-### Experimental Projects
-
-* 🎶 Generate your own melodies
-* 🎮 Create retro game sounds
-* 🥁 Experiment with rhythm
-* 🎧 Experiment with rapidly changing frequencies
-* 🎵 Recreate recognizable musical patterns
-* 🎛️ Use sensors to control pitch
-
-[IMAGE: Collage of Arduino sound projects]
-
----
 
 # The Core Idea
 
@@ -874,6 +819,7 @@ The `tone()` function is simple, but it introduces several important concepts th
                     ▼
                   SOUND
 ```
+[image](assets/diagrams/jAAI2uKprbje8HowyvTHm3_1789933673091_na1fn_L2hvbWUvdWJ1bnR1L3RvbmUtcGFyYW1ldGVyLXRyZWU.webp)
 
 At its simplest:
 
@@ -906,25 +852,3 @@ With these simple tools, we can control:
 And that is enough to turn a simple buzzer into a tiny programmable instrument.
 
 ---
-
-# Further Exploration
-
-Once the basics are comfortable, try experimenting with:
-
-* Different frequencies
-* Different note durations
-* Pauses between notes
-* Multiple octaves
-* Rhythms
-* Melodies
-* Button-controlled notes
-* Sensors that change pitch
-* Game sound effects
-* LEDs synchronized with music
-* More complex musical patterns
-
-The next step is no longer simply **making a sound**.
-
-It is learning how to control that sound deliberately.
-
-This version now mirrors the structure of your video while making the material useful independently as a future reference.
